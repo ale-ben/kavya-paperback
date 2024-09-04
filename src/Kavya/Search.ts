@@ -7,6 +7,7 @@ import {
 } from '@paperback/types';
 import { CacheManager } from './CacheManager';
 import {
+	KAVYA_UNSUPPORTED_LIBRARY_TYPES,
 	KavitaRequestInterceptor,
 	getKavitaAPI,
 	getOptions,
@@ -60,7 +61,7 @@ export async function searchRequest(
 		const result = JSON.parse(response.data ?? '[]');
 
 		for (const library of result) {
-			if (library.type === 2 || library.type === 4) {
+			if (library.type in KAVYA_UNSUPPORTED_LIBRARY_TYPES) {
 				excludeLibraryIds.push(library.id);
 			}
 		}

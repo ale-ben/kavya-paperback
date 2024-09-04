@@ -27,6 +27,7 @@ import {
 	serverSettingsMenu
 } from './Settings';
 import {
+	KAVYA_UNSUPPORTED_LIBRARY_TYPES,
 	KavitaRequestInterceptor,
 	getKavitaAPI,
 	getOptions,
@@ -44,7 +45,7 @@ const sortHelper = (a: any, b: any) => {
 
 export const KavyaInfo: SourceInfo = {
 	version: '1.3.6',
-	name: 'Kavya',
+	name: 'KavyaTest',
 	icon: 'icon.png',
 	author: 'ACK72',
 	authorWebsite: 'https://github.com/ACK72',
@@ -53,7 +54,7 @@ export const KavyaInfo: SourceInfo = {
 	websiteBaseURL: 'https://www.kavitareader.com/',
 	sourceTags: [
 		{
-			text: 'Kavita',
+			text: 'KavitaTest',
 			type: BadgeColor.GREEN,
 		},
 	],
@@ -194,7 +195,7 @@ export class Kavya implements ChapterProviding, HomePageSectionsProviding, Manga
 		const libraryResult = JSON.parse(libraryResponse.data ?? '[]');
 
 		for (const library of libraryResult) {
-			if (excludeUnsupportedLibrary && library.type === 2) continue;
+			if (excludeUnsupportedLibrary && library.type in KAVYA_UNSUPPORTED_LIBRARY_TYPES) continue;
 			includeLibraryIds.push(library.id);
 		}
 		
@@ -307,7 +308,7 @@ export class Kavya implements ChapterProviding, HomePageSectionsProviding, Manga
 		const excludeLibraryIds: number[] = [];
 		
 		for (const library of result) {
-			if (excludeUnsupportedLibrary && library.type === 2) {
+			if (excludeUnsupportedLibrary && library.type in KAVYA_UNSUPPORTED_LIBRARY_TYPES) {
 				excludeLibraryIds.push(library.id);
 				continue;
 			}
