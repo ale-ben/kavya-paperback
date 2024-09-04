@@ -180,6 +180,11 @@ export const DEFAULT_VALUES: any = {
 	enableRecursiveSearch: false
 }
 
+export const KAVYA_UNSUPPORTED_LIBRARY_TYPES: number[] = [
+	2,
+	4
+];
+
 export async function getKavitaAPI(stateManager: SourceStateManager): Promise<{url: string, key: string}> {
 	const kavitaAPIUrl = (await stateManager.retrieve('kavitaAPIUrl') as string | undefined) ?? DEFAULT_VALUES.kavitaAPIUrl;
 	const kavitaAPIKey = (await stateManager.keychain.retrieve('kavitaAPIKey') as string | undefined) ?? DEFAULT_VALUES.kavitaAPIKey;
